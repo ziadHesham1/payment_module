@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:payment_module/app_generic_image_widget.dart';
-import 'package:payment_module/app_text_field.dart';
-import 'package:payment_module/card_model.dart';
-import 'package:payment_module/constants.dart';
+import 'package:payment_module/core/app_generic_image_widget.dart';
+import 'package:payment_module/core/app_text_field.dart';
+import 'package:payment_module/features/more/payment_details/data/models/card_model.dart';
+import 'package:payment_module/core/app_floating_button.dart';
+import 'package:payment_module/core/app_theme.dart';
 
 class AddCardScreen extends StatefulWidget {
   const AddCardScreen({super.key});
@@ -72,22 +73,9 @@ class _AddCardScreenState extends State<AddCardScreen> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: ElevatedButton(
+      floatingActionButton: AppFloatingButton(
+        text: 'Add Card',
         onPressed: _submitCard,
-        style: ElevatedButton.styleFrom(
-          fixedSize: Size(260.w, 50.h),
-          backgroundColor: Colors.blue,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20.r),
-          ),
-        ),
-        child: const Text(
-          'Add Card',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
       ),
     );
   }

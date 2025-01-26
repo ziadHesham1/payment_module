@@ -57,6 +57,7 @@ class CardModel {
       name: '',
     );
   }
+
   // Constructor
   CardModel({
     this.isDefault = false,
@@ -72,6 +73,14 @@ class CardModel {
     }
     return '****';
   }
+
+  static final CardModel dummy = CardModel(
+    cardNumber: '4111 1111 1111 1111',
+    cardType: CardType.visa,
+    expiryDate: '12/25',
+    cvv: '123',
+    name: 'John Doe',
+  );
 
   // Convert a CardModel instance to a map
   Map<String, dynamic> toMap() {

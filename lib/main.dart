@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:payment_module/home_screen.dart';
+import 'app_navbar.dart';
+
+import 'core/app_theme.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,11 +22,9 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return MaterialApp(
           title: 'Flutter Demo',
-          theme: ThemeData(
-            // colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primary),
-            useMaterial3: true,
-          ),
-          home: const HomeScreen(),
+          theme: AppTheme.lightTheme,
+          debugShowCheckedModeBanner: false,
+          home: const AppNavbar(),
         );
       },
     );

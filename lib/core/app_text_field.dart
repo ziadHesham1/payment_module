@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:payment_module/core/app_theme.dart';
 
 class AppTextField extends StatelessWidget {
   final TextEditingController? controller;
@@ -42,17 +43,17 @@ class AppTextField extends StatelessWidget {
             maxLength: maxLength,
             decoration: InputDecoration(
               hintText: hintText,
-              border: OutlineInputBorder(
+              enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8.0),
                 borderSide: BorderSide(
-                  color: Colors.grey.shade400,
+                  color: Colors.grey.shade300,
                   width: 1.0,
                 ),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8.0),
                 borderSide: const BorderSide(
-                  color: Colors.blue,
+                  color: AppColors.primary,
                   width: 1.5,
                 ),
               ),

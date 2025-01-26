@@ -1,4 +1,4 @@
-import 'package:payment_module/card_model.dart';
+import 'package:payment_module/features/more/payment_details/data/models/card_model.dart';
 
 class PaymentMethodsModel {
   final List<CardModel> cards;

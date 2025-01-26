@@ -1,24 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:payment_module/core/app_container_button.dart';
+import 'package:payment_module/core/app_theme.dart';
 
-import 'app_generic_image_widget.dart';
-import 'card_model.dart';
-import 'constants.dart';
+import '../../../../core/app_generic_image_widget.dart';
+import '../data/models/card_model.dart';
 
 class CardTileWidget extends StatelessWidget {
+  final CardModel card;
+  final bool isSelected;
+  final bool showDefault;
   const CardTileWidget({
     super.key,
     required this.card,
+    this.isSelected = false,
+    this.showDefault = false,
   });
-
-  final CardModel card;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 10.h),
       decoration: BoxDecoration(
-        color: card.isDefault ? Colors.blue.withOpacity(0.1) : Colors.white,
+        color: isSelected ? Colors.blue.withOpacity(0.1) : Colors.white,
         borderRadius: BorderRadius.circular(20.r),
       ),
       child: Row(
@@ -47,44 +51,23 @@ class CardTileWidget extends StatelessWidget {
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      if (card.isDefault) ...{
-                        SizedBox(width: 8.w),
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 10.w,
-                            vertical: 4.h,
-                          ),
-                          margin: EdgeInsets.symmetric(
-                            horizontal: 8.w,
-                            vertical: 4.h,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Colors.blue.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(14.r),
-                          ),
-                          child: const Text(
-                            'primary',
-                            style: TextStyle(
-                              color: AppColors.primary,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
-                      }
+
+                      // SizedBox(width: 8.w),
+                      if (showDefault) _defaultWidget(),
                     ],
                   ),
                   SizedBox(height: 4.h),
                   Text(
                     card.encryptedCardNumber,
                     style: const TextStyle(
-                      color: Colors.grey,
+                      color: AppColors.secondaryText,
                     ),
                   ),
                 ],
               ),
             ],
           ),
-          if (card.isDefault)
+          if (isSelected)
             Container(
               padding: EdgeInsets.symmetric(
                 horizontal: 8.w,
@@ -99,9 +82,50 @@ class CardTileWidget extends StatelessWidget {
                 shape: BoxShape.circle,
                 // borderRadius: BorderRadius.circular(14.r),
               ),
-              child: const Icon(Icons.check, color: Colors.white, size: 16),
+              child: const Icon(Icons.check, color: AppColors.light, size: 16),
             ),
         ],
+      ),
+    );
+  }
+
+  Widget _defaultWidget() {
+    if (card.isDefault) {
+      return _defaultContainer('Default');
+    } else {
+      return AppContainerButton(
+        borderRadius: 14.r,
+        child: const Text(
+          'Set As Default',
+          style: TextStyle(
+            color: AppColors.primary,
+          ),
+        ),
+        onPressed: () {},
+      );
+    }
+  }
+
+  Container _defaultContainer(String text) {
+    return Container(
+      padding: EdgeInsets.symmetric(
+        horizontal: 10.w,
+        vertical: 4.h,
+      ),
+      margin: EdgeInsets.symmetric(
+        horizontal: 8.w,
+        vertical: 4.h,
+      ),
+      decoration: BoxDecoration(
+        color: AppColors.secondary,
+        borderRadius: BorderRadius.circular(14.r),
+      ),
+      child: Text(
+        text,
+        style: const TextStyle(
+          color: AppColors.primary,
+          fontWeight: FontWeight.w500,
+        ),
       ),
     );
   }
